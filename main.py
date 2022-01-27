@@ -56,7 +56,7 @@ def is_bitlink(token, url):
     return response.ok
 
 
-if __name__ == "__main__":
+def main():
     load_dotenv()
     
     token = os.getenv('BITLY_TOKEN')
@@ -77,3 +77,7 @@ if __name__ == "__main__":
             print('Битлинк:', shorten_link(token, url))
     except requests.exceptions.HTTPError:
         print("Ошибка! Неправильная ссылка!")
+
+
+if __name__ == "__main__":
+    main()
