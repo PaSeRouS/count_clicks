@@ -1,9 +1,9 @@
 import argparse
 import os
-import requests
-
-from dotenv import load_dotenv
 from urllib.parse import urlparse
+
+import requests
+from dotenv import load_dotenv
 
 
 def shorten_link(token, url):
@@ -59,7 +59,7 @@ def is_bitlink(token, url):
 if __name__ == "__main__":
     load_dotenv()
     
-    TOKEN = os.getenv('BITLY_TOKEN')
+    token = os.getenv('BITLY_TOKEN')
 
     parser = argparse.ArgumentParser()
     parser.add_argument("url")
@@ -71,9 +71,9 @@ if __name__ == "__main__":
     checked_url = '{netloc}{path}'.format(netloc=parse.netloc, path=parse.path)
 
     try:
-        if is_bitlink(TOKEN, checked_url):
-            print('Количество кликов:', count_clicks(TOKEN, checked_url))
+        if is_bitlink(token, checked_url):
+            print('Количество кликов:', count_clicks(token, checked_url))
         else:
-            print('Битлинк:', shorten_link(TOKEN, url))
+            print('Битлинк:', shorten_link(token, url))
     except requests.exceptions.HTTPError:
         print("Ошибка! Неправильная ссылка!")
